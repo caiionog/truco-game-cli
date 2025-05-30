@@ -52,8 +52,4 @@ Basta executar o programa e seguir as instruções exibidas no terminal para jog
 
 Caio, estudante de Engenharia de Software na Universidade de Brasília (UnB). 
 
----
 
-## Licença
-
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
