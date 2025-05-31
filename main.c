@@ -9,6 +9,13 @@ typedef struct {
     char naipe[10];
 } Carta;
 
+typedef struct {
+    char nome[30];
+    Carta mao[3];
+    int pontos;
+} Jogador;
+
+
 void criarBaralho(Carta baralho[]) {
     // Paus
     baralho[0] = (Carta){"J (Valete)", 1, "Paus"};
@@ -62,7 +69,7 @@ int main() {
     Carta baralho[27];
 
     criarBaralho(baralho);
-    embaralharBaralho(baralho, 27); // Usando 27 porque são 27 cartas
+    embaralharBaralho(baralho, 27); 
 
     printf("Baralho embaralhado:\n\n");
     for (int i = 0; i < 27; i++) {
