@@ -73,15 +73,31 @@ void inicializarJogadores(Jogador *humano, Jogador *ia) {
     ia->pontos = 0;
 }
 
+void distribuirCartas(Carta baralho[], Jogador *humano, Jogador *ia) {
+    for (int i = 0; i < 3; i++) {
+        humano->mao[i] = baralho[i];
+        ia->mao[i] = baralho[i + 3];
+    }
+}
+
 int main() {
     Carta baralho[27];
+    Jogador jogadorHumano, jogadorIA;
 
     criarBaralho(baralho);
     embaralharBaralho(baralho, 27); 
 
+    inicializarJogadores(&jogadorHumano, &jogadorIA);
+    distribuirCartas(baralho, &jogadorHumano, &jogadorIA);
+
     printf("Baralho embaralhado:\n\n");
     for (int i = 0; i < 27; i++) {
         printf("%2d. %s de %s (valor: %d)\n", i + 1, baralho[i].nome, baralho[i].naipe, baralho[i].valor);
+    }
+
+    printf("Cartas de %s:\n", jogadorHumano.nome);
+    for (int i = 0; i < 3; i++) {
+        printf("- %s de %s (valor: %d)\n", jogadorHumano.mao[i].nome, jogadorHumano.mao[i].naipe, jogadorHumano.mao[i].valor);
     }
 
     return 0;
