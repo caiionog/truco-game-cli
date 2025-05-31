@@ -15,7 +15,6 @@ typedef struct {
     int pontos;
 } Jogador;
 
-
 void criarBaralho(Carta baralho[]) {
     // Paus
     baralho[0] = (Carta){"J (Valete)", 1, "Paus"};
@@ -63,6 +62,15 @@ void embaralharBaralho(Carta baralho[], int tamanho) {
         baralho[i] = baralho[j];
         baralho[j] = temp;
     }
+}
+
+void inicializarJogadores(Jogador *humano, Jogador *ia) {
+    printf("Digite seu nome: ");
+    scanf("%s", humano->nome);
+    humano->pontos = 0;
+
+    strcpy(ia->nome, "CPU");
+    ia->pontos = 0;
 }
 
 int main() {
