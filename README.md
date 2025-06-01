@@ -1,6 +1,12 @@
-# Truco Game CLI 🎴
+# Truco Game CLI (Command Line Interface) 🃏
 
-Uma versão em linha de comando do clássico jogo de cartas brasileiro **Truco**, desenvolvida em linguagem C.
+Uma versão **simplificada** do jogo de cartas brasileiro **Truco**, desenvolvida para rodar no terminal utilizando a linguagem C. Este projeto foi criado com o objetivo de aprofundar os conhecimentos em algoritmos e programação de computadores, além de servir como trabalho de conclusão para a disciplina.
+
+---
+
+## Como jogar
+
+A sequência das cartas segue o padrão do **Truco tradicional**. No entanto, nesta versão, o jogo é disputado no formato 1x1 contra a CPU, em vez das partidas com 4 jogadores comuns no jogo original. Cada mão é composta por até 3 jogadas, e a partida termina quando um dos jogadores vence 3 rodadas — com no máximo 5 rodadas por jogo. Vale destacar que, por enquanto, a funcionalidade de pedir "truco" ainda não foi implementada.
 
 ---
 
@@ -32,12 +38,6 @@ Uma versão em linha de comando do clássico jogo de cartas brasileiro **Truco**
    ```bash
    ./truco
    ```
-
----
-
-## Como jogar
-
-Basta executar o programa e seguir as instruções exibidas no terminal para jogar Truco contra o computador.
 
 ---
 

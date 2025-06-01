@@ -63,7 +63,7 @@ void embaralharBaralho(Carta baralho[], int tamanho) {
     }
 }
 
-void inicializarJogadores(Jogador *humano, Jogador *ia) {
+void inicializarJogadores(Jogador *humano, Jogador *ia) { // Zera os pontos e atribui nome
     printf("Digite seu nome: ");
     scanf("%s", humano->nome);
     humano->pontos = 0;
@@ -74,14 +74,14 @@ void inicializarJogadores(Jogador *humano, Jogador *ia) {
     ia->rodadasVencidas = 0;
 }
 
-void distribuirCartas(Carta baralho[], Jogador *humano, Jogador *ia) {
+void distribuirCartas(Carta baralho[], Jogador *humano, Jogador *ia) { // Distribui as cartas
     for (int i = 0; i < 3; i++) {
         humano->mao[i] = baralho[i];
         ia->mao[i] = baralho[i + 3];
     }
 }
 
-void mostrarCartas(Jogador *jogador, int usadas[]) {
+void mostrarCartas(Jogador *jogador, int usadas[]) { // Imprime as cartas do jogador
     printf("\nCartas de %s:\n", jogador->nome);
     for (int i = 0; i < 3; i++) {
         if (!usadas[i]) {
@@ -90,7 +90,7 @@ void mostrarCartas(Jogador *jogador, int usadas[]) {
     }
 }
 
-int escolherCarta(Jogador *jogador, int usadas[]) {
+int escolherCarta(Jogador *jogador, int usadas[]) { // Função para escolher a carta que irá jogar
     int escolha;
     do {
         printf("Escolha uma carta (1-3): ");
@@ -102,7 +102,7 @@ int escolherCarta(Jogador *jogador, int usadas[]) {
     return escolha;
 }
 
-int escolherCartaIA(Jogador *ia, int usadasIA[], int jogadorJaJogou, Carta cartaHumano) {
+int escolherCartaIA(Jogador *ia, int usadasIA[], int jogadorJaJogou, Carta cartaHumano) { // CPU (Tomada de Decisão)
     int melhor = -1;
     int menor = 999;
     for (int i = 0; i < 3; i++) {
@@ -132,7 +132,7 @@ int escolherCartaIA(Jogador *ia, int usadasIA[], int jogadorJaJogou, Carta carta
     return escolha;
 }
 
-int determinarVencedorRodada(Carta cartaHumano, Carta cartaIA) {
+int determinarVencedorRodada(Carta cartaHumano, Carta cartaIA) { // Compara as cartas e determina um vencedor
     printf("\nVocê jogou: %s de %s\n", cartaHumano.nome, cartaHumano.naipe);
     printf("IA jogou: %s de %s\n", cartaIA.nome, cartaIA.naipe);
 
@@ -149,7 +149,7 @@ int determinarVencedorRodada(Carta cartaHumano, Carta cartaIA) {
 }
 
 int main() {
-    setlocale(LC_ALL, ""); // Corrige acentuação
+    setlocale(LC_ALL, "pt_BR.UTF-8");
     srand(time(NULL));
 
     Carta baralho[27];
@@ -195,12 +195,12 @@ int main() {
 
         if (jogadorHumano.pontos > jogadorIA.pontos) {
             jogadorHumano.rodadasVencidas++;
-            printf("\n✅ Você venceu a mão!\n");
+            printf("\nVocê venceu a mão!\n");
         } else if (jogadorIA.pontos > jogadorHumano.pontos) {
             jogadorIA.rodadasVencidas++;
-            printf("\n🤖 IA venceu a mão!\n");
+            printf("\nIA venceu a mão!\n");
         } else {
-            printf("\n⚖️ Empate na mão!\n");
+            printf("\nEmpate na mão!\n");
         }
 
         partida++;
@@ -209,9 +209,12 @@ int main() {
 
     printf("\n=== FIM DO JOGO ===\n");
     if (jogadorHumano.rodadasVencidas > jogadorIA.rodadasVencidas)
-        printf("🏆 Você venceu o jogo!\n");
+        printf("%s venceu o jogo!\n", jogadorHumano.nome);
     else
-        printf("🤖 A IA venceu o jogo!\n");
+        printf("A IA venceu o jogo!\n");
 
     return 0;
 }
+
+// chcp 65001 no terminal (Acentuação)
+
