@@ -80,6 +80,49 @@ void distribuirCartas(Carta baralho[], Jogador *humano, Jogador *ia) {
     }
 }
 
+void mostrarCartas(Jogador *jogador) {
+    printf("\nCartas de %s:\n", jogador->nome);
+    for (int i = 0; i < 3; i++) {
+        printf("%d. %s de %s (valor: %d)\n", i + 1, jogador->mao[i].nome, jogador->mao[i].naipe, jogador->mao[i].valor);
+    }
+}
+
+int escolherCarta(Jogador *jogador) {
+    int escolha;
+    do {
+        printf("\nEscolha uma carta (1-3): ");
+        scanf("%d", &escolha);
+    } while (escolha < 1 || escolha > 3);
+    
+    return escolha - 1;  // índice
+}
+
+Carta jogadaIA(Jogador *ia) {
+    int maiorIdx = 0;
+    for (int i = 1; i < 3; i++) {
+        if (ia->mao[i].valor > ia->mao[maiorIdx].valor) {
+            maiorIdx = i;
+        }
+    }
+    return ia->mao[maiorIdx];
+}
+
+int determinarVencedorRodada(Carta cartaHumano, Carta cartaIA) {
+    printf("\nVocê jogou: %s de %s\n", cartaHumano.nome, cartaHumano.naipe);
+    printf("IA jogou: %s de %s\n", cartaIA.nome, cartaIA.naipe);
+
+    if (cartaHumano.valor > cartaIA.valor) {
+        printf("Você venceu a rodada!\n");
+        return 1; // Humano venceu
+    } else if (cartaHumano.valor < cartaIA.valor) {
+        printf("IA venceu a rodada!\n");
+        return 2; // IA venceu
+    } else {
+        printf("Empate!\n");
+        return 0;
+    }
+}
+
 int main() {
     Carta baralho[27];
     Jogador jogadorHumano, jogadorIA;
@@ -90,15 +133,20 @@ int main() {
     inicializarJogadores(&jogadorHumano, &jogadorIA);
     distribuirCartas(baralho, &jogadorHumano, &jogadorIA);
 
-    printf("Baralho embaralhado:\n\n");
-    for (int i = 0; i < 27; i++) {
-        printf("%2d. %s de %s (valor: %d)\n", i + 1, baralho[i].nome, baralho[i].naipe, baralho[i].valor);
+    mostrarCartas(&jogadorHumano);
+    int indiceEscolhido = escolherCarta(&jogadorHumano);
+    Carta cartaHumano = jogadorHumano.mao[indiceEscolhido];
+    Carta cartaIA = jogadaIA(&jogadorIA);
+
+    int resultado = determinarVencedorRodada(cartaHumano, cartaIA);
+
+    if (resultado == 1) {
+        jogadorHumano.pontos++;
+    } else if (resultado == 2) {
+        jogadorIA.pontos++;
     }
 
-    printf("Cartas de %s:\n", jogadorHumano.nome);
-    for (int i = 0; i < 3; i++) {
-        printf("- %s de %s (valor: %d)\n", jogadorHumano.mao[i].nome, jogadorHumano.mao[i].naipe, jogadorHumano.mao[i].valor);
-    }
+    printf("\nPlacar:\nVocê: %d\nIA: %d\n", jogadorHumano.pontos, jogadorIA.pontos);
 
     return 0;
 }
