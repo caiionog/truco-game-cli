@@ -64,7 +64,12 @@ void embaralharBaralho(Carta baralho[], int tamanho) {
 }
 
 void inicializarJogadores(Jogador *humano, Jogador *ia) { // Zera os pontos e atribui nome
-    printf("Digite seu nome: ");
+    printf("=====================================\n");
+    printf("||          TRUCO GAME CLI          ||\n");
+    printf("||                                  ||\n");
+    printf("||      FEITO POR CAIO NOGUEIRA     ||\n");
+    printf("=====================================\n");
+    printf("Digite seu nome para comecar: ");
     scanf("%s", humano->nome);
     humano->pontos = 0;
     humano->rodadasVencidas = 0;
@@ -133,11 +138,11 @@ int escolherCartaIA(Jogador *ia, int usadasIA[], int jogadorJaJogou, Carta carta
 }
 
 int determinarVencedorRodada(Carta cartaHumano, Carta cartaIA) { // Compara as cartas e determina um vencedor
-    printf("\nVocê jogou: %s de %s\n", cartaHumano.nome, cartaHumano.naipe);
+    printf("\nVoce jogou: %s de %s\n", cartaHumano.nome, cartaHumano.naipe);
     printf("IA jogou: %s de %s\n", cartaIA.nome, cartaIA.naipe);
 
     if (cartaHumano.valor > cartaIA.valor) {
-        printf("Você venceu a rodada!\n");
+        printf("Voce venceu a rodada!\n");
         return 1;
     } else if (cartaHumano.valor < cartaIA.valor) {
         printf("IA venceu a rodada!\n");
@@ -159,7 +164,7 @@ int main() {
 
     int partida = 1;
     while (jogadorHumano.rodadasVencidas < 3 && jogadorIA.rodadasVencidas < 3 && partida <= 5) {
-        printf("\n========== MÃO %d ==========\n", partida);
+        printf("\n========== MAO %d ==========\n", partida);
         criarBaralho(baralho);
         embaralharBaralho(baralho, 27);
         distribuirCartas(baralho, &jogadorHumano, &jogadorIA);
@@ -195,12 +200,12 @@ int main() {
 
         if (jogadorHumano.pontos > jogadorIA.pontos) {
             jogadorHumano.rodadasVencidas++;
-            printf("\nVocê venceu a mão!\n");
+            printf("\nVocê venceu a mao!\n");
         } else if (jogadorIA.pontos > jogadorHumano.pontos) {
             jogadorIA.rodadasVencidas++;
-            printf("\nIA venceu a mão!\n");
+            printf("\nIA venceu a mao!\n");
         } else {
-            printf("\nEmpate na mão!\n");
+            printf("\nEmpate na mao!\n");
         }
 
         partida++;
